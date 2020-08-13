@@ -1,69 +1,83 @@
-#1. Import the NUMPY package under the name np.
+#1. Import the NUMPY package under the name np
 
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
-
+print(np.version.version)
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
+
+a = np.random.random((2,3,5))
 
 
 
 #4. Print a.
 
-
+print(a)
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-
+b = np.random.random((5,3,2))
 
 #6. Print b.
 
-
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-
+a.size == b.size
 
 
 #8. Are you able to add a and b? Why or why not?
 
-
+try:
+    a+b
+except:
+    print(f'sorry you cannot sum matrixes of diferent order')
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-
+c = b.T
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
+d = a+c
 
+print(f'{a} and {c} has the same order, so you can sum now')
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-
+print(a)
+print(d)
+print(f' a and d have the same shape')
 
 
 #12. Multiply a and c. Assign the result to e.
 
-
+e = a*c
 
 #13. Does e equal to a? Why or why not?
 
+print('e = ',e)
 
+print ( f'e is different from a because a was generated randomly, but a and e have the same shape')
+print('a = ',a)
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-
+d_max = d.max()
+d_min = d.min()
+d_mean = d.mean()
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
 
-
+f = np.empty([2,3,5])
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -74,8 +88,27 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
+def funcion_17(d):
+    d1 = 0
+    if d>d_min and d<d_mean:
+        d1 = 25
+    elif d>d_mean and d<d_max:
+        d1 = 75
+    elif d== d_min:
+        d1 = 0
+    elif d == d_mean:
+        d1 = 50
+    elif d == d_max:
+        d1 = 100
+        
+    return d1
 
-
+for i in range (0,2):
+    for j in range (0,3):
+        for k in range (0,5):
+            dd = funcion_17(d[i][j][k])
+            f[i][j][k] = dd
+            
 
 
 """
@@ -99,6 +132,7 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
@@ -112,3 +146,30 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+
+f2 = np.empty([2,3,5],dtype =str)
+
+def funcion_18(d):
+    d1 = 0
+    if d>d_min and d<d_mean:
+        d1 = 'B'
+    elif d>d_mean and d<d_max:
+        d1 = 'D'
+    elif d== d_min:
+        d1 = 'A'
+    elif d == d_mean:
+        d1 = 'C'
+    elif d == d_max:
+        d1 = 'E'
+        
+    return d1
+
+for i in range (0,2):
+    for j in range (0,3):
+        for k in range (0,5):
+            dd = funcion_18(d[i][j][k])
+            f2[i][j][k] = dd
+            
+print(f2)
+
+
